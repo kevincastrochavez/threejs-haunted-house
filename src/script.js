@@ -123,13 +123,7 @@ door.geometry.setAttribute(
   'uv2',
   new THREE.Float32BufferAttribute(door.geometry.attributes.uv.array, 2)
 );
-gui
-  .add(door.material, 'displacementScale')
-  .min(0.01)
-  .max(0.2)
-  .step(0.001)
-  .name('Door depth');
-door.position.z = 2 + 0.01;
+door.position.z = 1.99;
 door.position.y = 1;
 house.add(door);
 
@@ -199,15 +193,12 @@ for (let index = 0; index < 30; index++) {
 // Ghosts
 
 const ghost1 = new THREE.PointLight('#ff00ff', 2, 3);
-gui.addColor(ghost1, 'color').name('Ghost 1');
 scene.add(ghost1);
 
 const ghost2 = new THREE.PointLight('#00ffff', 2, 3);
-gui.addColor(ghost1, 'color').name('Ghost 2');
 scene.add(ghost2);
 
 const ghost3 = new THREE.PointLight('#ffff00', 2, 3);
-gui.addColor(ghost1, 'color').name('Ghost 3');
 scene.add(ghost3);
 
 /**
@@ -310,6 +301,19 @@ ghost2.shadow.mapSize.far = 7;
 ghost3.shadow.mapSize.width = 256;
 ghost3.shadow.mapSize.height = 256;
 ghost3.shadow.mapSize.far = 7;
+
+// GUI Controls
+gui
+  .add(door.material, 'displacementScale')
+  .min(0.01)
+  .max(0.2)
+  .step(0.001)
+  .name('Door depth');
+gui.add(graveMaterial, 'wireframe').name('Graves Wireframe');
+gui.add(bushMaterial, 'wireframe').name('Bushes Wireframe');
+gui.addColor(ghost1, 'color').name('Ghost 1');
+gui.addColor(ghost1, 'color').name('Ghost 2');
+gui.addColor(ghost1, 'color').name('Ghost 3');
 
 /**
  * Animate
