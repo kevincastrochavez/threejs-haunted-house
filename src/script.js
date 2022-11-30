@@ -123,6 +123,12 @@ door.geometry.setAttribute(
   'uv2',
   new THREE.Float32BufferAttribute(door.geometry.attributes.uv.array, 2)
 );
+gui
+  .add(door.material, 'displacementScale')
+  .min(0.01)
+  .max(0.2)
+  .step(0.001)
+  .name('Door depth');
 door.position.z = 2 + 0.01;
 door.position.y = 1;
 house.add(door);
@@ -193,12 +199,15 @@ for (let index = 0; index < 30; index++) {
 // Ghosts
 
 const ghost1 = new THREE.PointLight('#ff00ff', 2, 3);
+gui.addColor(ghost1, 'color').name('Ghost 1');
 scene.add(ghost1);
 
 const ghost2 = new THREE.PointLight('#00ffff', 2, 3);
+gui.addColor(ghost1, 'color').name('Ghost 2');
 scene.add(ghost2);
 
 const ghost3 = new THREE.PointLight('#ffff00', 2, 3);
+gui.addColor(ghost1, 'color').name('Ghost 3');
 scene.add(ghost3);
 
 /**
@@ -206,16 +215,11 @@ scene.add(ghost3);
  */
 // Ambient light
 const ambientLight = new THREE.AmbientLight('#b9d5ff', 0.12);
-gui.add(ambientLight, 'intensity').min(0).max(1).step(0.001);
 scene.add(ambientLight);
 
 // Directional light
 const moonLight = new THREE.DirectionalLight('#b9d5ff', 0.12);
 moonLight.position.set(4, 5, -2);
-gui.add(moonLight, 'intensity').min(0).max(1).step(0.001);
-gui.add(moonLight.position, 'x').min(-5).max(5).step(0.001);
-gui.add(moonLight.position, 'y').min(-5).max(5).step(0.001);
-gui.add(moonLight.position, 'z').min(-5).max(5).step(0.001);
 scene.add(moonLight);
 
 // Door light
