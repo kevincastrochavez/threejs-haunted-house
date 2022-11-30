@@ -189,6 +189,17 @@ for (let index = 0; index < 30; index++) {
   graves.add(grave);
 }
 
+// Ghosts
+
+const ghost1 = new THREE.PointLight('#ff00ff', 2, 3);
+scene.add(ghost1);
+
+const ghost2 = new THREE.PointLight('#00ffff', 2, 3);
+scene.add(ghost2);
+
+const ghost3 = new THREE.PointLight('#ffff00', 2, 3);
+scene.add(ghost3);
+
 /**
  * Lights
  */
@@ -269,6 +280,23 @@ const clock = new THREE.Clock();
 
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
+
+  // Update ghosts
+  const ghost1Angle = elapsedTime;
+  ghost1.position.x = Math.cos(ghost1Angle) * 4;
+  ghost1.position.z = Math.sin(ghost1Angle) * 4;
+  ghost1.position.y = Math.sin(elapsedTime * 3);
+
+  const ghost2Angle = -elapsedTime * 0.64;
+  ghost2.position.x = Math.cos(ghost2Angle) * 5;
+  ghost2.position.z = Math.sin(ghost2Angle) * 5;
+  ghost2.position.y = Math.sin(elapsedTime * 4) + Math.sin(elapsedTime * 2.5);
+
+  const ghost3Angle = -elapsedTime * 0.36;
+  ghost3.position.x =
+    Math.cos(ghost3Angle) * (7 + Math.sin(elapsedTime * 0.64));
+  ghost3.position.z = Math.sin(ghost3Angle) * (7 + Math.sin(elapsedTime));
+  ghost3.position.y = Math.sin(elapsedTime * 5) + Math.sin(elapsedTime * 2);
 
   // Update controls
   controls.update();
